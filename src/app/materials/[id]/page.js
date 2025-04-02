@@ -6,7 +6,6 @@ export default async function Page({ params }) {
   const material = await Material.getById(id);
   return (
     <>
-      <p>materials page for {id}</p>
       <MaterialComponent material={material} />
     </>
   );

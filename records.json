@@ -1,0 +1,46 @@
+[
+  {
+    "_id": {
+      "$oid": "67edb830bdfd17c1267ad6c2"
+    },
+    "name": "Iron Ore",
+    "altName": "Iron Ore",
+    "materialType": "raw",
+    "categories": [
+      "general"
+    ],
+    "recipe": null,
+    "thumbnailUrl": "https://static.wikia.nocookie.net/dyson-sphere-program/images/8/87/Iron_Ore.png"
+  },
+  {
+    "_id": {
+      "$oid": "67edb856bdfd17c1267ad6c3"
+    },
+    "name": "Iron Ingot",
+    "altName": "Iron",
+    "materialType": "utility",
+    "categories": [
+      "general"
+    ],
+    "recipe": {
+      "ingredients": [
+        {
+          "materialId": "67edb830bdfd17c1267ad6c2",
+          "quantity": {
+            "$numberInt": "1"
+          }
+        }
+      ],
+      "craftingTime": {
+        "$numberInt": "1"
+      },
+      "producedIn": [
+        {
+          "materialId": "000011110000111100001111"
+        }
+      ],
+      "replicator": true
+    },
+    "thumbnailUrl": "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/0a/Iron_Ingot.png"
+  }
+]
