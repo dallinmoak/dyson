@@ -5,14 +5,6 @@ export default async function Home() {
 
   const data = await Material.getAll();
 
-  const altData = [...data,
-  {
-    _id: "1234",
-    name: "reaaaaaaaaaaaaaaaaaaaaaly long name",
-    materialType: "raw",
-  }
-  ]
-
   return (
     <>
       <h1>Material List</h1>
@@ -24,7 +16,7 @@ export default async function Home() {
           </tr>
         </thead>
         <tbody>
-          {altData.map((material) => {
+          {data.map((material) => {
             return (
               <tr key={material._id}>
                 <td><Link href={`/materials/${material._id}`}>
