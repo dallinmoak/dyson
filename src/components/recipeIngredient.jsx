@@ -1,5 +1,6 @@
 'use client';
 
+import { encodeName } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -19,7 +20,7 @@ export default function RecipeIngredient({ ingredient, showDetails = false }) {
       <>
         <li>
           {ingredient.quantity}x&nbsp;
-          <Link href={`/materials/${ingredient.materialId}`}>
+          <Link href={`/materials/${encodeName(material?.name)}`}>
             {material.name}
             {/* {ingredient.materialId} */}
           </Link>
