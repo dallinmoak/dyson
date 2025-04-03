@@ -1,5 +1,6 @@
 'use client';
 
+import { encodeName } from "@/lib/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -14,5 +15,5 @@ export default function RecipeProducer({ id }) {
     fetchMaterials();
   }, []);
 
-  return <span><Link href={`/materials/${id}`}>{material?.name}</Link></span>
+  return <span><Link href={`/materials/${material?.name ? encodeName(material.name) : ''}`}>{material?.name}</Link></span>
 }
