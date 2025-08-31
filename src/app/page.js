@@ -9,6 +9,7 @@ export default async function Home() {
   return (
     <>
       <h1>Material List</h1>
+      <Link href="/materials/add">Add Material</Link>
       <table className="">
         <thead>
           <tr>
