@@ -1,6 +1,5 @@
 'use client'
 
-// import Material from "@/lib/data";
 import { useState } from "react";
 
 export default function AddMaterial() {
@@ -9,11 +8,7 @@ export default function AddMaterial() {
     if(name){
       const path = `/api/materials/by-name/${name}`;
       const res = await fetch(path);
-      console.log(`fetching ${path}...`);
-      console.log(res);
-      const exists = res.ok;
-      console.log(`material ${name} ${exists ? 'exists✅' : '❌does not exist'}`);
-      return exists;
+      return res.ok;
     }
     return false;
   };

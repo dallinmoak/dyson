@@ -1,21 +1,37 @@
 @import 'tailwindcss';
 
+body {
+  @apply bg-[#1C262C] text-white;
+}
+
 h1 {
   @apply font-extrabold text-3xl;
 }
 
 a {
-  @apply underline text-[#0000ff];
+  @apply underline text-[#8c8cfa];
 }
 
 table {
   @apply border-collapse;
 }
 
-thead {
-  @apply bg-[#c0c0c0]
+table>*>tr>* {
+  @apply border-2 border-[#ccc] px-2 py-1 bg-[#1d2429];
 }
 
-table>*>tr>* {
-  @apply border-2 border-black px-2 py-1;
+table>thead>tr>th {
+  @apply bg-[#2b363d];
+}
+
+form {
+  @apply flex flex-col gap-4;
+}
+
+form > button, form > input:where([type="button"], [type="reset"], [type="submit"]) {
+  @apply rounded px-2 py-1 bg-[#346c8f] w-fit;
+}
+
+input, select {
+  @apply border-1 border-[#ccc] px-2 py-1 bg-[#334753];
 }

@@ -19,7 +19,7 @@ export default function MaterialComponent({ material }) {
       </p>
 
       {material.recipe && (
-        <>
+        <div className="rounded border border-white bg-[rgba(255,255,255,0.1)] max-w-[400px] p-2">  
           <h2>Recipe:</h2>
           <div className="pl-2">
             <p>Ingredients:</p>
@@ -55,7 +55,7 @@ export default function MaterialComponent({ material }) {
               )}
             </p>
           </div>
-        </>
+        </div>
       )}
       {material.rarity && (
         <p>Rarity:&nbsp;{material.rarity}</p>

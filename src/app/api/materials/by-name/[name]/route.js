@@ -3,7 +3,6 @@ import Material from "@/lib/data";
 export async function GET(req, { params }) {
   try {
     const name = (await params).name;
-    console.log(`Fetching material by name: ${name}`);
     const materials = await Material.getByName(name);
     if (!materials) {
       return new Response(JSON.stringify({ error: "Material not found" }), {
