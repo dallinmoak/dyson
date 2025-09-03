@@ -58,7 +58,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongodb_1 = require("mongodb");
 var dotenv = require("dotenv");
-dotenv.config();
+// dotenv.config();
+dotenv.config({ path: ".env.local" });
 var placeholder = {
     name: "placeholder",
     materialType: "raw",
@@ -71,39 +72,53 @@ var placeholder = {
 var sLists = {
     mining: [
         { targetName: "Mining Machine" },
-        { targetName: "Advanced Mining Machine" }
+        { targetName: "Advanced Mining Machine" },
     ],
     assemblers: [
         { targetName: "Assembling Machine Mk.I" },
         { targetName: "Assembling Machine Mk.II" },
-        { targetName: "Assembling Machine Mk.III" }
+        { targetName: "Assembling Machine Mk.III" },
     ],
-    gasCollectors: [{
-            targetName: "Orbital Collector"
-        }],
-    oilCollectors: [{
-            targetName: "Oil Extractor"
-        }],
-    oilRefiners: [{
-            targetName: "Oil Refinery"
-        }],
-    smelters: [
-        { targetName: "Arc Smelter" },
-        { targetName: "Plane Smelter" }
+    gasCollectors: [
+        {
+            targetName: "Orbital Collector",
+        },
     ],
-    waterCollectors: [{
-            targetName: "Water Pump"
-        }],
+    oilCollectors: [
+        {
+            targetName: "Oil Extractor",
+        },
+    ],
+    oilRefiners: [
+        {
+            targetName: "Oil Refinery",
+        },
+    ],
+    smelters: [{ targetName: "Arc Smelter" }, { targetName: "Plane Smelter" }],
+    waterCollectors: [
+        {
+            targetName: "Water Pump",
+        },
+    ],
     chemicalPlants: [
         { targetName: "Chemical Plant" },
-        { targetName: "Quantum Chemical Plant" }
+        { targetName: "Quantum Chemical Plant" },
     ],
-    fractionator: [{
-            targetName: "Fractionator"
-        }],
-    researchers: [{
-            targetName: "Matrix Lab"
-        }]
+    fractionator: [
+        {
+            targetName: "Fractionator",
+        },
+    ],
+    researchers: [
+        {
+            targetName: "Matrix Lab",
+        },
+    ],
+    colliders: [
+        {
+            targetName: "Miniature Particle Collider",
+        },
+    ],
 };
 var raws = [
     {
@@ -150,7 +165,7 @@ var raws = [
         categories: ["general"],
         rarity: 0,
         gatheredWith: sLists.waterCollectors,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/9/9d/Water.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/9/9d/Water.png",
     },
     {
         name: "Crude Oil",
@@ -168,7 +183,7 @@ var raws = [
         categories: ["general"],
         rarity: 1,
         gatheredWith: sLists.mining,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/32/Silicon_Ore.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/32/Silicon_Ore.png",
     },
     {
         name: "Titanium Ore",
@@ -177,7 +192,7 @@ var raws = [
         categories: ["general"],
         rarity: 1,
         gatheredWith: sLists.mining,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/34/Titanium_Ore.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/34/Titanium_Ore.png",
     },
     {
         name: "Kimberlite Ore",
@@ -186,7 +201,7 @@ var raws = [
         categories: ["general"],
         rarity: 2,
         gatheredWith: sLists.mining,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/0a/Kimberlite_Ore.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/0a/Kimberlite_Ore.png",
     },
     {
         name: "Fractal Silicon",
@@ -195,7 +210,7 @@ var raws = [
         categories: ["general"],
         rarity: 3,
         gatheredWith: sLists.mining,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/a4/Fractal_Silicon.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/a4/Fractal_Silicon.png",
     },
     {
         name: "Grating Crystal",
@@ -204,7 +219,7 @@ var raws = [
         categories: ["general"],
         rarity: 3,
         gatheredWith: sLists.mining,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/31/Grating_Crystal.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/31/Grating_Crystal.png",
     },
     {
         name: "Stalagmite Crystal",
@@ -213,7 +228,7 @@ var raws = [
         categories: ["general"],
         rarity: 4,
         gatheredWith: sLists.mining,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/3d/Stalagmite_Crystal.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/3d/Stalagmite_Crystal.png",
     },
     {
         name: "Unipolar Magnet",
@@ -222,7 +237,7 @@ var raws = [
         categories: ["general"],
         rarity: 5,
         gatheredWith: sLists.mining,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/5/59/Unipolar_Magnet.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/5/59/Unipolar_Magnet.png",
     },
     {
         name: "Fire Ice",
@@ -231,8 +246,8 @@ var raws = [
         categories: ["general"],
         rarity: 4,
         gatheredWith: sLists.mining,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/e/e8/Fire_Ice.png"
-    }
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/e/e8/Fire_Ice.png",
+    },
 ];
 var rawCraftables = [
     {
@@ -242,21 +257,25 @@ var rawCraftables = [
         categories: ["general"],
         rarity: 1,
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Crude Oil" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
-            colaterals: [{
+            colaterals: [
+                {
                     material: { targetName: "Refined Oil" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             craftingTime: 4,
             producedIn: sLists.oilRefiners,
-            replicator: false
+            replicator: false,
         },
         gatheredWith: sLists.gasCollectors,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/e/ed/Hydrogen.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/e/ed/Hydrogen.png",
     },
     {
         name: "Deuterium",
@@ -265,21 +284,25 @@ var rawCraftables = [
         categories: ["general"],
         rarity: 3,
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Hydrogen" },
                     quantity: 1,
-                }],
+                },
+            ],
             outputCount: 0.01,
-            colaterals: [{
+            colaterals: [
+                {
                     material: { targetName: "Hydrogen" },
-                    quantity: 0.99
-                }],
+                    quantity: 0.99,
+                },
+            ],
             craftingTime: 0.17,
             producedIn: sLists.fractionator,
-            replicator: false
+            replicator: false,
         },
         gatheredWith: sLists.gasCollectors,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/a9/Deuterium.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/a9/Deuterium.png",
     },
     {
         name: "Sulfuric Acid",
@@ -288,23 +311,27 @@ var rawCraftables = [
         categories: ["general"],
         rarity: 4,
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Water" },
-                    quantity: 4
-                }, {
+                    quantity: 4,
+                },
+                {
                     material: { targetName: "Stone" },
-                    quantity: 8
-                }, {
+                    quantity: 8,
+                },
+                {
                     material: { targetName: "Refined Oil" },
-                    quantity: 6
-                }],
+                    quantity: 6,
+                },
+            ],
             outputCount: 4,
             craftingTime: 6,
             producedIn: sLists.assemblers,
-            replicator: false
+            replicator: false,
         },
         gatheredWith: sLists.waterCollectors,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/8/8e/Sulfuric_Acid.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/8/8e/Sulfuric_Acid.png",
     },
     {
         name: "Organic Crystal",
@@ -313,28 +340,30 @@ var rawCraftables = [
         categories: ["general"],
         rarity: 4,
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Water" },
                     quantity: 1,
                 },
                 {
                     material: { targetName: "Refined Oil" },
-                    quantity: 1
+                    quantity: 1,
                 },
                 {
                     material: { targetName: "Plastic" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
             craftingTime: 6,
             producedIn: sLists.chemicalPlants,
-            replicator: false
+            replicator: false,
         },
         gatheredWith: sLists.mining,
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/36/Organic_Crystal.png"
-    }
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/36/Organic_Crystal.png",
+    },
 ];
-var tier1Craftables = [
+var t1Craftables = [
     {
         name: "Iron Ingot",
         altName: "Iron",
@@ -342,16 +371,18 @@ var tier1Craftables = [
         tier: 1,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Iron Ore" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 1,
             producedIn: sLists.smelters,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/0a/Iron_Ingot.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/0a/Iron_Ingot.png",
     },
     {
         name: "Copper Ingot",
@@ -360,16 +391,18 @@ var tier1Craftables = [
         tier: 1,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Copper Ore" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 1,
             producedIn: sLists.smelters,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/00/Copper_Ingot.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/00/Copper_Ingot.png",
     },
     {
         name: "Magnet",
@@ -377,16 +410,18 @@ var tier1Craftables = [
         tier: 1,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Iron Ore" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 1.5,
             producedIn: sLists.smelters,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/8/8c/Magnet.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/8/8c/Magnet.png",
     },
     {
         name: "Stone Brick",
@@ -395,16 +430,18 @@ var tier1Craftables = [
         tier: 1,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Stone" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 1,
             producedIn: sLists.smelters,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/6/6d/Stone_Brick.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/6/6d/Stone_Brick.png",
     },
     {
         name: "Energetic Graphite",
@@ -413,16 +450,18 @@ var tier1Craftables = [
         tier: 1,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Coal" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.smelters,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/c/cb/Energetic_Graphite.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/c/cb/Energetic_Graphite.png",
     },
     {
         name: "High Purity Silicon",
@@ -431,16 +470,18 @@ var tier1Craftables = [
         tier: 1,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Silicon Ore" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.smelters,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/b/b0/High-Purity_Silicon.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/b/b0/High-Purity_Silicon.png",
     },
     {
         name: "Titanium Ingot",
@@ -449,16 +490,18 @@ var tier1Craftables = [
         tier: 1,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Titanium Ore" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.smelters,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/6/61/Titanium_Ingot.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/6/61/Titanium_Ingot.png",
     },
     {
         name: "Refined Oil",
@@ -466,20 +509,24 @@ var tier1Craftables = [
         tier: 1,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Crude Oil" },
-                    quantity: 2
-                }],
-            colaterals: [{
+                    quantity: 2,
+                },
+            ],
+            colaterals: [
+                {
                     material: { targetName: "Hydrogen" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 4,
             producedIn: sLists.oilCollectors,
-            replicator: false
+            replicator: false,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/5/56/Refined_Oil.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/5/56/Refined_Oil.png",
     },
     {
         name: "Glass",
@@ -487,16 +534,18 @@ var tier1Craftables = [
         tier: 1,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Stone" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.smelters,
-            replicator: false
+            replicator: false,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/1/15/Glass.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/1/15/Glass.png",
     },
     {
         name: "Proliferator Mk.I",
@@ -504,16 +553,18 @@ var tier1Craftables = [
         tier: 1,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Coal" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 0.5,
             producedIn: sLists.assemblers,
-            replicator: false
+            replicator: false,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/8/84/Proliferator_Mk.I.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/8/84/Proliferator_Mk.I.png",
     },
     {
         name: "Combustible Unit",
@@ -521,38 +572,43 @@ var tier1Craftables = [
         tier: 2,
         categories: ["energy"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Coal" },
-                    quantity: 3
-                }],
+                    quantity: 3,
+                },
+            ],
             outputCount: 1,
             craftingTime: 3,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/9/91/Combustible_Unit.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/9/91/Combustible_Unit.png",
     },
 ];
-var teir2Craftables = [
+var t2Craftables = [
     {
         name: "Magnetic Coil",
         materialType: "craftable",
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Magnet" },
-                    quantity: 2
-                }, {
+                    quantity: 2,
+                },
+                {
                     material: { targetName: "Copper Ingot" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 2,
             craftingTime: 1,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/af/Magnetic_Coil.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/af/Magnetic_Coil.png",
     },
     {
         name: "Steel",
@@ -560,16 +616,18 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Iron Ingot" },
-                    quantity: 3
-                }],
+                    quantity: 3,
+                },
+            ],
             outputCount: 1,
             craftingTime: 3,
             producedIn: sLists.smelters,
-            replicator: false
+            replicator: false,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/c/c9/Steel.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/c/c9/Steel.png",
     },
     {
         name: "Gear",
@@ -577,16 +635,18 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Iron Ingot" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 2,
             craftingTime: 1,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/06/Gear.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/06/Gear.png",
     },
     {
         name: "Circuit Board",
@@ -594,19 +654,22 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Copper Ingot" },
-                    quantity: 1
-                }, {
+                    quantity: 1,
+                },
+                {
                     material: { targetName: "Iron Ingot" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 2,
             craftingTime: 1,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/a7/Circuit_Board.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/a7/Circuit_Board.png",
     },
     {
         name: "Prism",
@@ -614,16 +677,18 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Glass" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 2,
             craftingTime: 2,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/a8/Prism.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/a8/Prism.png",
     },
     {
         name: "Microcrystalline Component",
@@ -632,19 +697,22 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "High Purity Silicon" },
-                    quantity: 2
-                }, {
+                    quantity: 2,
+                },
+                {
                     material: { targetName: "Copper Ingot" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/7/73/Microcrystalline_Component.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/7/73/Microcrystalline_Component.png",
     },
     {
         name: "Crystal Silicon",
@@ -652,26 +720,32 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "High Purity Silicon" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.smelters,
-            replicator: false
+            replicator: false,
         },
-        altRecipes: [{
-                ingredients: [{
+        altRecipes: [
+            {
+                ingredients: [
+                    {
                         material: { targetName: "Fractal Silicon" },
-                        quantity: 1
-                    }],
+                        quantity: 1,
+                    },
+                ],
                 outputCount: 2,
                 craftingTime: 1.5,
                 producedIn: sLists.assemblers,
-                replicator: false
-            }],
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/7/73/Crystal_Silicon.png"
+                replicator: false,
+            },
+        ],
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/7/73/Crystal_Silicon.png",
     },
     {
         name: "Diamond",
@@ -679,25 +753,31 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Energetic Graphite" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.smelters,
-            replicator: false
+            replicator: false,
         },
-        altRecipes: [{
-                ingredients: [{
+        altRecipes: [
+            {
+                ingredients: [
+                    {
                         material: { targetName: "Kimberlite Ore" },
-                        quantity: 1
-                    }],
+                        quantity: 1,
+                    },
+                ],
                 outputCount: 2,
                 craftingTime: 1.5,
                 producedIn: sLists.smelters,
-                replicator: false
-            }],
+                replicator: false,
+            },
+        ],
         icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/e/ea/Diamond.png",
     },
     {
@@ -706,19 +786,22 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general", "energy"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Titanium Ingot" },
-                    quantity: 1
-                }, {
+                    quantity: 1,
+                },
+                {
                     material: { targetName: "Hydrogen" },
-                    quantity: 10
-                }],
+                    quantity: 10,
+                },
+            ],
             outputCount: 2,
             craftingTime: 6,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/7/75/Hydrogen_Fuel_Rod.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/7/75/Hydrogen_Fuel_Rod.png",
     },
     {
         name: "Magnum Ammo Box",
@@ -727,16 +810,18 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general", "combat"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Copper Ingot" },
-                    quantity: 3
-                }],
+                    quantity: 3,
+                },
+            ],
             outputCount: 1,
             craftingTime: 1,
             producedIn: sLists.assemblers,
-            replicator: false
+            replicator: false,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/d/d7/Magnum_Ammo_Box.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/d/d7/Magnum_Ammo_Box.png",
     },
     {
         name: "Plastic",
@@ -744,19 +829,22 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Refined Oil" },
                     quantity: 2,
-                }, {
+                },
+                {
                     material: { targetName: "Energetic Graphite" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 3,
             producedIn: sLists.chemicalPlants,
-            replicator: false
+            replicator: false,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/0b/Plastic.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/0/0b/Plastic.png",
     },
     {
         name: "Graphene",
@@ -764,19 +852,22 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Energetic Graphite" },
-                    quantity: 3
-                }, {
+                    quantity: 3,
+                },
+                {
                     material: { targetName: "Sulfuric Acid" },
                     quantity: 1,
-                }],
+                },
+            ],
             outputCount: 2,
             craftingTime: 3,
             producedIn: sLists.chemicalPlants,
-            replicator: false
+            replicator: false,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/ab/Graphene.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/a/ab/Graphene.png",
     },
     {
         name: "Titanium Crystal",
@@ -784,19 +875,22 @@ var teir2Craftables = [
         tier: 2,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Organic Crystal" },
-                    quantity: 1
-                }, {
+                    quantity: 1,
+                },
+                {
                     material: { targetName: "Titanium Ingot" },
-                    quantity: 3
-                }],
+                    quantity: 3,
+                },
+            ],
             outputCount: 1,
             craftingTime: 4,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/b/ba/Titanium_Crystal.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/b/ba/Titanium_Crystal.png",
     },
     {
         name: "Titanium Glass",
@@ -804,22 +898,26 @@ var teir2Craftables = [
         categories: ["general"],
         tier: 2,
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Glass" },
-                    quantity: 2
-                }, {
+                    quantity: 2,
+                },
+                {
                     material: { targetName: "Titanium Ingot" },
-                    quantity: 2
-                }, {
+                    quantity: 2,
+                },
+                {
                     material: { targetName: "Water" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 2,
             craftingTime: 5,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://media.dsp-wiki.com/5/56/Icon_Titanium_Glass.png"
+        icon: "https://media.dsp-wiki.com/5/56/Icon_Titanium_Glass.png",
     },
     {
         name: "Energy Matrix",
@@ -828,20 +926,23 @@ var teir2Craftables = [
         tier: 2,
         categories: ["research"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Energetic Graphite" },
                     quantity: 2,
-                }, {
+                },
+                {
                     material: { targetName: "Hydrogen" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
             craftingTime: 6,
             producedIn: sLists.researchers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://media.dsp-wiki.com/8/83/Icon_Energy_Matrix.png"
-    }
+        icon: "https://media.dsp-wiki.com/8/83/Icon_Energy_Matrix.png",
+    },
 ];
 var t2Structures = [
     {
@@ -851,19 +952,22 @@ var t2Structures = [
         tier: 2,
         categories: ["general", "logistics"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Stone Brick" },
-                    quantity: 4
-                }, {
+                    quantity: 4,
+                },
+                {
                     material: { targetName: "Iron Ingot" },
-                    quantity: 4
-                }],
+                    quantity: 4,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/7/7c/Depot_MK.I.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/7/7c/Depot_MK.I.png",
     },
 ];
 var t3Craftables = [
@@ -873,20 +977,24 @@ var t3Craftables = [
         tier: 3,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Titanium Ingot" },
                     quantity: 4,
-                }, {
+                },
+                {
                     material: { targetName: "Steel" },
-                    quantity: 4
-                }, {
+                    quantity: 4,
+                },
+                {
                     material: { targetName: "Sulfuric Acid" },
                     quantity: 8,
-                }],
+                },
+            ],
             outputCount: 4,
             craftingTime: 12,
             producedIn: sLists.smelters,
-            replicator: true
+            replicator: true,
         },
         icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/d/d2/Titanium_Alloy.png",
     },
@@ -896,22 +1004,26 @@ var t3Craftables = [
         tier: 3,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Iron Ingot" },
-                    quantity: 2
-                }, {
+                    quantity: 2,
+                },
+                {
                     material: { targetName: "Gear" },
-                    quantity: 1
-                }, {
+                    quantity: 1,
+                },
+                {
                     material: { targetName: "Magnetic Coil" },
                     quantity: 1,
-                }],
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/c/c3/Electric_Motor.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/c/c3/Electric_Motor.png",
     },
     {
         name: "Plasma Exciter",
@@ -919,19 +1031,22 @@ var t3Craftables = [
         tier: 3,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Magnetic Coil" },
                     quantity: 4,
-                }, {
+                },
+                {
                     material: { targetName: "Prism" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/4/42/Plasma_Exciter.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/4/42/Plasma_Exciter.png",
     },
     {
         name: "Electromagnetic Matrix",
@@ -940,19 +1055,22 @@ var t3Craftables = [
         tier: 3,
         categories: ["research"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Magnetic Coil" },
                     quantity: 1,
-                }, {
+                },
+                {
                     material: { targetName: "Circuit Board" },
                     quantity: 1,
-                }],
+                },
+            ],
             outputCount: 1,
             craftingTime: 3,
             producedIn: sLists.researchers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/c/cd/Electromagnetic_Matrix.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/c/cd/Electromagnetic_Matrix.png",
     },
     {
         name: "Photon Combiner",
@@ -960,19 +1078,22 @@ var t3Craftables = [
         tier: 3,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Prism" },
-                    quantity: 2
-                }, {
+                    quantity: 2,
+                },
+                {
                     material: { targetName: "Circuit Board" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 3,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/6/6c/Photon_Combiner.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/6/6c/Photon_Combiner.png",
     },
     {
         name: "Processor",
@@ -980,19 +1101,22 @@ var t3Craftables = [
         tier: 3,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Circuit Board" },
-                    quantity: 2
-                }, {
+                    quantity: 2,
+                },
+                {
                     material: { targetName: "Microcrystalline Component" },
                     quantity: 2,
-                }],
+                },
+            ],
             outputCount: 1,
             craftingTime: 3,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/4/4e/Processor.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/4/4e/Processor.png",
     },
     {
         name: "Proliferator Mk.II",
@@ -1000,19 +1124,22 @@ var t3Craftables = [
         tier: 3,
         categories: ["general", "logistics"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Proliferator Mk.I" },
                     quantity: 2,
-                }, {
+                },
+                {
                     material: { targetName: "Diamond" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 1,
             craftingTime: 1,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/b/bc/Proliferator_Mk.II.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/b/bc/Proliferator_Mk.II.png",
     },
     {
         name: "Foundation",
@@ -1020,19 +1147,22 @@ var t3Craftables = [
         tier: 3,
         categories: ["general", "logistics"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Stone Brick" },
                     quantity: 3,
-                }, {
+                },
+                {
                     material: { targetName: "Steel" },
                     quantity: 1,
-                }],
+                },
+            ],
             outputCount: 1,
             craftingTime: 1,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/3b/Foundation.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/3/3b/Foundation.png",
     },
     {
         name: "Engine",
@@ -1040,19 +1170,22 @@ var t3Craftables = [
         tier: 3,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Magnetic Coil" },
-                    quantity: 1
-                }, {
+                    quantity: 1,
+                },
+                {
                     material: { targetName: "Copper Ingot" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
             craftingTime: 3,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://media.dsp-wiki.com/2/21/Icon_Engine.png"
+        icon: "https://media.dsp-wiki.com/2/21/Icon_Engine.png",
     },
     {
         name: "Titanium Ammo Box",
@@ -1060,19 +1193,22 @@ var t3Craftables = [
         tier: 3,
         categories: ["combat"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Magnum Ammo Box" },
-                    quantity: 1
-                }, {
+                    quantity: 1,
+                },
+                {
                     material: { targetName: "Titanium Ingot" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/9/95/Titanium_Ammo_Box.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/9/95/Titanium_Ammo_Box.png",
     },
     {
         name: "Shell Set",
@@ -1080,19 +1216,22 @@ var t3Craftables = [
         tier: 3,
         categories: ["combat"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Copper Unit" },
-                    quantity: 9
-                }, {
+                    quantity: 9,
+                },
+                {
                     material: { targetName: "Combustible Unit" },
-                    quantity: 2
-                }],
+                    quantity: 2,
+                },
+            ],
             outputCount: 1,
             craftingTime: 1.5,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/7/74/Shell_Set.png"
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/7/74/Shell_Set.png",
     },
     {
         name: "Explosive Unit",
@@ -1100,49 +1239,57 @@ var t3Craftables = [
         tier: 3,
         categories: ["combat"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Combustible Unit" },
-                    quantity: 2
-                }, {
+                    quantity: 2,
+                },
+                {
                     material: { targetName: "Plastic" },
-                    quantity: 2
-                }, {
+                    quantity: 2,
+                },
+                {
                     material: { targetName: "Sufuric Acid" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 2,
             craftingTime: 6,
             producedIn: sLists.chemicalPlants,
-            replicator: false
+            replicator: false,
         },
-        icon: "https://media.dsp-wiki.com/8/88/Icon_Explosive_Unit.png"
-    }
+        icon: "https://media.dsp-wiki.com/8/88/Icon_Explosive_Unit.png",
+    },
 ];
 var t3Structures = [
     {
         name: "Assembling Machine Mk.I",
         altName: "Assembler 1",
-        materialType: 'structure-crafter',
+        materialType: "structure-crafter",
         tier: 3,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Iron Ingot" },
-                    quantity: 4
-                }, {
+                    quantity: 4,
+                },
+                {
                     material: { targetName: "Gear" },
-                    quantity: 8
-                }, {
+                    quantity: 8,
+                },
+                {
                     material: { targetName: "Circuit Board" },
-                    quantity: 4
-                }],
+                    quantity: 4,
+                },
+            ],
             outputCount: 1,
             craftingTime: 2,
             producedIn: sLists.assemblers,
-            replicator: true
+            replicator: true,
         },
-        icon: "https://media.dsp-wiki.com/8/8e/Icon_Assembling_Machine_Mk.I.png"
-    }
+        icon: "https://media.dsp-wiki.com/8/8e/Icon_Assembling_Machine_Mk.I.png",
+    },
 ];
 var t4Craftables = [
     {
@@ -1151,164 +1298,271 @@ var t4Craftables = [
         tier: 4,
         categories: ["general"],
         recipe: {
-            ingredients: [{
+            ingredients: [
+                {
                     material: { targetName: "Graphene" },
                     quantity: 3,
-                }, {
+                },
+                {
                     material: { targetName: "Titanium Alloy" },
-                    quantity: 1
-                }],
+                    quantity: 1,
+                },
+            ],
             outputCount: 2,
             craftingTime: 4,
             producedIn: sLists.chemicalPlants,
-            replicator: false
+            replicator: false,
         },
-        altRecipes: [{
-                ingredients: [{
+        altRecipes: [
+            {
+                ingredients: [
+                    {
                         material: { targetName: "Stalagmite Crystal" },
-                        quantity: 6
-                    }],
+                        quantity: 6,
+                    },
+                ],
                 outputCount: 2,
                 craftingTime: 4,
                 producedIn: sLists.chemicalPlants,
-                replicator: false
-            }],
-        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/b/be/Carbon_Nanotube.png"
+                replicator: false,
+            },
+        ],
+        icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/b/be/Carbon_Nanotube.png",
+    },
+    {
+        name: "Electromagnetic Turbine",
+        materialType: "craftable",
+        tier: 4,
+        categories: ["general"],
+        recipe: {
+            ingredients: [
+                {
+                    material: { targetName: "Magnetic Coil" },
+                    quantity: 2,
+                },
+                {
+                    material: { targetName: "Electric Motor" },
+                    quantity: 2,
+                },
+            ],
+            outputCount: 1,
+            craftingTime: 2,
+            producedIn: sLists.assemblers,
+            replicator: true,
+        },
+        icon: "https://media.dsp-wiki.com/5/53/Icon_Electromagnetic_Turbine.png",
+    },
+];
+var t5Craftables = [
+    {
+        name: "Particle Container",
+        materialType: "craftable",
+        tier: 5,
+        categories: ["general"],
+        recipe: {
+            ingredients: [
+                {
+                    material: { targetName: "Electromagnetic Turbine" },
+                    quantity: 2,
+                },
+                {
+                    material: { targetName: "Copper Ingot" },
+                    quantity: 2,
+                },
+                {
+                    material: { targetName: "Graphene" },
+                    quantity: 2,
+                },
+            ],
+            outputCount: 1,
+            craftingTime: 4,
+            producedIn: sLists.assemblers,
+            replicator: true,
+        },
+        altRecipes: [
+            {
+                ingredients: [
+                    {
+                        material: { targetName: "Unipolar Magnet" },
+                        quantity: 10,
+                    },
+                    {
+                        material: { targetName: "Copper Ingot" },
+                        quantity: 2,
+                    },
+                ],
+                outputCount: 1,
+                craftingTime: 4,
+                producedIn: sLists.assemblers,
+                replicator: false,
+            },
+        ],
+        icon: "https://media.dsp-wiki.com/f/fd/Icon_Particle_Container.png",
+    },
+    {
+        name: "Super-Magnetic Ring",
+        materialType: "craftable",
+        tier: 5,
+        categories: ["general"],
+        recipe: {
+            ingredients: [
+                {
+                    material: { targetName: "Electromagnetic Turbine" },
+                    quantity: 2,
+                },
+                {
+                    material: { targetName: "Magnet" },
+                    quantity: 3,
+                },
+                {
+                    material: { targetName: "Energetic Graphite" },
+                    quantity: 1,
+                },
+            ],
+            outputCount: 1,
+            craftingTime: 3,
+            producedIn: sLists.assemblers,
+            replicator: true,
+        },
+        icon: "https://media.dsp-wiki.com/b/b4/Icon_Super-Magnetic_Ring.png",
+    },
+];
+var t6Craftables = [
+    {
+        name: "Annihilation Constraint Sphere",
+        materialType: "craftable",
+        tier: 6,
+        categories: ["general"],
+        recipe: {
+            ingredients: [
+                {
+                    material: { targetName: "Particle Container" },
+                    quantity: 1,
+                },
+                {
+                    material: { targetName: "Processor" },
+                    quantity: 1,
+                },
+            ],
+            outputCount: 1,
+            craftingTime: 20,
+            producedIn: sLists.assemblers,
+            replicator: false,
+        },
+        icon: "https://media.dsp-wiki.com/3/37/Icon_Annihilation_Constraint_Sphere.png",
+    },
+    {
+        name: "Strange Matter",
+        materialType: "craftable",
+        tier: 6,
+        categories: ["general", "energy"],
+        recipe: {
+            ingredients: [
+                {
+                    material: { targetName: "Particle Container" },
+                    quantity: 2,
+                },
+                {
+                    material: { targetName: "Iron Ingot" },
+                    quantity: 2,
+                },
+                {
+                    material: { targetName: "Deuterium" },
+                    quantity: 10,
+                },
+            ],
+            outputCount: 1,
+            craftingTime: 20,
+            producedIn: sLists.colliders,
+            replicator: false,
+        },
+        icon: "https://media.dsp-wiki.com/8/8f/Icon_Strange_Matter.png",
     },
 ];
 var addMaterial = function (material) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, recordToSave, gatheredWithIds, e_1, _a, ingredients, colaterals, outputCount, craftingTime, producedIn, replicator, ingredientsWithIds, colateralsWithIds, producedInWithIds, e_2, e_3;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                console.log("adding material ".concat(material.name));
-                return [4 /*yield*/, getMaterialId(material.name)];
+    var id, placeholderId, recordToSave, gatheredWithIds, insertRecipePlaceholders, savedRecordId, col, savedRecord, e_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, getMaterialId(material.name)];
             case 1:
-                id = _b.sent();
-                if (!!id) return [3 /*break*/, 15];
-                recordToSave = __assign({}, material);
-                if (!(material.gatheredWith && material.gatheredWith.length > 0)) return [3 /*break*/, 5];
-                _b.label = 2;
+                id = _a.sent();
+                return [4 /*yield*/, getMaterialId("placeholder")];
             case 2:
-                _b.trys.push([2, 4, , 5]);
-                return [4 /*yield*/, Promise.all(material.gatheredWith
-                        .map(function (m) { return __awaiter(void 0, void 0, void 0, function () {
-                        var foundId;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4 /*yield*/, getMaterialId(m.targetName, true)];
-                                case 1:
-                                    foundId = _a.sent();
-                                    // console.log(`   id for ${name} id ${foundId}`);
-                                    return [2 /*return*/, __assign(__assign({}, m), { id: foundId })];
-                            }
-                        });
-                    }); }))];
-            case 3:
-                gatheredWithIds = _b.sent();
-                recordToSave.gatheredWith = gatheredWithIds;
-                return [3 /*break*/, 5];
-            case 4:
-                e_1 = _b.sent();
-                console.log(e_1);
-                return [3 /*break*/, 5];
-            case 5:
-                if (!material.recipe) return [3 /*break*/, 12];
-                _b.label = 6;
-            case 6:
-                _b.trys.push([6, 11, , 12]);
-                recordToSave.recipe = null;
-                _a = __assign({}, material.recipe), ingredients = _a.ingredients, colaterals = _a.colaterals, outputCount = _a.outputCount, craftingTime = _a.craftingTime, producedIn = _a.producedIn, replicator = _a.replicator;
-                return [4 /*yield*/, Promise.all(ingredients
-                        .map(function (i) { return __awaiter(void 0, void 0, void 0, function () {
-                        var foundId;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4 /*yield*/, getMaterialId(i.material.targetName, true)];
-                                case 1:
-                                    foundId = _a.sent();
-                                    return [2 /*return*/, {
-                                            material: __assign(__assign({}, i.material), { id: foundId }),
-                                            quantity: i.quantity
-                                        }];
-                            }
-                        });
-                    }); }))];
-            case 7:
-                ingredientsWithIds = _b.sent();
-                colateralsWithIds = void 0;
-                if (!(colaterals && colaterals.length > 0)) return [3 /*break*/, 9];
-                return [4 /*yield*/, Promise.all(colaterals === null || colaterals === void 0 ? void 0 : colaterals.map(function (c) { return __awaiter(void 0, void 0, void 0, function () {
-                        var foundId;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0: return [4 /*yield*/, getMaterialId(c.material.targetName, true)];
-                                case 1:
-                                    foundId = _a.sent();
-                                    return [2 /*return*/, {
-                                            material: __assign(__assign({}, c.material), { id: foundId }),
-                                            quantity: c.quantity
-                                        }];
-                            }
-                        });
-                    }); }))];
-            case 8:
-                colateralsWithIds = _b.sent();
-                _b.label = 9;
-            case 9: return [4 /*yield*/, Promise.all(producedIn
-                    .map(function (p) { return __awaiter(void 0, void 0, void 0, function () {
-                    var id;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0: return [4 /*yield*/, getMaterialId(p.targetName, true)];
-                            case 1:
-                                id = _a.sent();
-                                return [2 /*return*/, {
-                                        id: id,
-                                        targetName: p.targetName
-                                    }];
-                        }
+                placeholderId = _a.sent();
+                recordToSave = __assign({}, material);
+                if (material.gatheredWith && material.gatheredWith.length > 0) {
+                    gatheredWithIds = material.gatheredWith.map(function (m) {
+                        return __assign(__assign({}, m), { id: placeholderId });
                     });
-                }); }))];
-            case 10:
-                producedInWithIds = _b.sent();
-                recordToSave.recipe = {
-                    ingredients: ingredientsWithIds,
-                    colaterals: colateralsWithIds,
-                    outputCount: outputCount,
-                    craftingTime: craftingTime,
-                    producedIn: producedInWithIds,
-                    replicator: replicator
+                    recordToSave.gatheredWith = gatheredWithIds;
+                }
+                insertRecipePlaceholders = function (r) {
+                    var _a = __assign({}, r), ingredients = _a.ingredients, colaterals = _a.colaterals, outputCount = _a.outputCount, craftingTime = _a.craftingTime, producedIn = _a.producedIn, replicator = _a.replicator;
+                    var ingredientsWithIds = ingredients.map(function (i) {
+                        return {
+                            material: __assign(__assign({}, i.material), { id: placeholderId }),
+                            quantity: i.quantity,
+                        };
+                    });
+                    var colateralsWithIds = colaterals === null || colaterals === void 0 ? void 0 : colaterals.map(function (c) {
+                        return {
+                            material: __assign(__assign({}, c.material), { id: placeholderId }),
+                            quantity: c.quantity,
+                        };
+                    });
+                    var producedInWithIds = producedIn.map(function (p) {
+                        return {
+                            id: placeholderId,
+                            targetName: p.targetName,
+                        };
+                    });
+                    return {
+                        ingredients: ingredientsWithIds,
+                        colaterals: colateralsWithIds,
+                        outputCount: outputCount,
+                        craftingTime: craftingTime,
+                        producedIn: producedInWithIds,
+                        replicator: replicator,
+                    };
                 };
-                return [3 /*break*/, 12];
-            case 11:
-                e_2 = _b.sent();
-                console.log(e_2);
-                return [3 /*break*/, 12];
-            case 12:
-                _b.trys.push([12, 14, , 15]);
+                if (material.recipe) {
+                    recordToSave.recipe = null;
+                    recordToSave.recipe = insertRecipePlaceholders(material.recipe);
+                }
+                if (material.altRecipes && material.altRecipes.length > 0) {
+                    recordToSave.altRecipes = material.altRecipes.map(insertRecipePlaceholders);
+                }
+                _a.label = 3;
+            case 3:
+                _a.trys.push([3, 7, , 8]);
                 return [4 /*yield*/, saveRecord(recordToSave)];
-            case 13:
-                _b.sent();
-                return [3 /*break*/, 15];
-            case 14:
-                e_3 = _b.sent();
-                console.log(e_3);
-                return [3 /*break*/, 15];
-            case 15: return [2 /*return*/];
+            case 4:
+                savedRecordId = _a.sent();
+                return [4 /*yield*/, getCol()];
+            case 5:
+                col = _a.sent();
+                return [4 /*yield*/, col.findOne({ _id: savedRecordId })];
+            case 6:
+                savedRecord = _a.sent();
+                return [2 /*return*/, savedRecord];
+            case 7:
+                e_1 = _a.sent();
+                console.log(e_1);
+                return [3 /*break*/, 8];
+            case 8: return [2 /*return*/];
         }
     });
 }); };
-var client = new mongodb_1.MongoClient(process.env.MONGO_URI);
+var mongoUri = process.env.MONGO_URI;
+var client = new mongodb_1.MongoClient(mongoUri);
 var getCol = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, db, e_4;
+    var _a, db, e_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 6, , 7]);
                 if (!client) {
-                    console.log("no existing mongo client found. creating a new one");
-                    client = new mongodb_1.MongoClient(process.env.MONGO_URI);
+                    client = new mongodb_1.MongoClient(mongoUri);
                 }
                 _b.label = 1;
             case 1:
@@ -1331,9 +1585,9 @@ var getCol = function () { return __awaiter(void 0, void 0, void 0, function () 
                 db = client.db();
                 return [2 /*return*/, db.collection("materials")];
             case 6:
-                e_4 = _b.sent();
-                console.log('connecting to materials collection failed :(');
-                console.log(e_4);
+                e_2 = _b.sent();
+                console.log("connecting to materials collection failed :(");
+                console.log(e_2);
                 return [3 /*break*/, 7];
             case 7: return [2 /*return*/];
         }
@@ -1345,7 +1599,7 @@ var getMaterialId = function (name_1) {
         args_1[_i - 1] = arguments[_i];
     }
     return __awaiter(void 0, __spreadArray([name_1], args_1, true), void 0, function (name, p) {
-        var col, rec, id, idString, e_5, _a;
+        var col, rec, id, idString, e_3, _a;
         if (p === void 0) { p = false; }
         return __generator(this, function (_b) {
             switch (_b.label) {
@@ -1356,15 +1610,13 @@ var getMaterialId = function (name_1) {
                 case 2:
                     _b.trys.push([2, 6, , 10]);
                     return [4 /*yield*/, col.findOne({
-                            name: name
-                        })
-                        // console.log(`query returned ${rec?.name}`);
-                    ];
+                            name: name,
+                        })];
                 case 3:
                     rec = _b.sent();
                     id = rec === null || rec === void 0 ? void 0 : rec._id;
                     if (!(!rec && p)) return [3 /*break*/, 5];
-                    return [4 /*yield*/, getMaterialId('placeholder')];
+                    return [4 /*yield*/, getMaterialId("placeholder")];
                 case 4: 
                 // console.log(`not found. returning placeholder`);
                 return [2 /*return*/, _b.sent()];
@@ -1372,10 +1624,10 @@ var getMaterialId = function (name_1) {
                     idString = id === null || id === void 0 ? void 0 : id.toString();
                     return [2 /*return*/, idString];
                 case 6:
-                    e_5 = _b.sent();
-                    console.log(e_5);
+                    e_3 = _b.sent();
+                    console.log(e_3);
                     if (!p) return [3 /*break*/, 8];
-                    return [4 /*yield*/, getMaterialId('placeholder')];
+                    return [4 /*yield*/, getMaterialId("placeholder")];
                 case 7:
                     _a = _b.sent();
                     return [3 /*break*/, 9];
@@ -1389,7 +1641,7 @@ var getMaterialId = function (name_1) {
     });
 };
 var saveRecord = function (rec) { return __awaiter(void 0, void 0, void 0, function () {
-    var col, res, e_6;
+    var col, res, e_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, getCol()];
@@ -1404,124 +1656,158 @@ var saveRecord = function (rec) { return __awaiter(void 0, void 0, void 0, funct
                 res = _a.sent();
                 if (res.acknowledged) {
                     process.stdout.write("saved ".concat(rec.name, " with id ").concat(res.insertedId, "\n"));
+                    return [2 /*return*/, res.insertedId];
                 }
                 return [3 /*break*/, 5];
             case 4:
-                e_6 = _a.sent();
-                console.log(e_6);
+                e_4 = _a.sent();
+                console.log(e_4);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
     });
 }); };
 var linkRefs = function (m) { return __awaiter(void 0, void 0, void 0, function () {
-    var newMaterial, buildRefList, linkRecipe;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var insertId, linkRecipe, newRecipe, linkedRecipe, newAltRecipes, linkedAltRecipes, newGatheredWith, linkedGatheredWith, newMaterial, col;
+    var _a, _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
-                newMaterial = m;
-                buildRefList = function (r_1) {
-                    var args_1 = [];
-                    for (var _i = 1; _i < arguments.length; _i++) {
-                        args_1[_i - 1] = arguments[_i];
-                    }
-                    return __awaiter(void 0, __spreadArray([r_1], args_1, true), void 0, function (r, ingredient) {
-                        var target, id;
-                        if (ingredient === void 0) { ingredient = false; }
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    target = ingredient ? r.material.targetName : r.targetName;
-                                    return [4 /*yield*/, getMaterialId(target)];
-                                case 1:
-                                    id = _a.sent();
-                                    if (!id) {
-                                        console.log("Target name ".concat(target, " not found"));
-                                        return [2 /*return*/, r];
-                                    }
-                                    else
-                                        return [2 /*return*/, __assign(__assign({}, r), { id: id })];
-                                    return [2 /*return*/];
-                            }
-                        });
+                if (!m) {
+                    // console.log(`Material not found`);
+                    return [2 /*return*/];
+                }
+                insertId = function (r) { return __awaiter(void 0, void 0, void 0, function () {
+                    var id;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0: return [4 /*yield*/, getMaterialId(r.targetName)];
+                            case 1:
+                                id = _a.sent();
+                                if (!id) {
+                                    // console.log(`Target name ${r.targetName} not found`);
+                                    return [2 /*return*/, r];
+                                }
+                                else {
+                                    // console.log(`Target name ${r.targetName} found with id ${id}`);
+                                    return [2 /*return*/, { targetName: r.targetName, id: id }];
+                                }
+                                return [2 /*return*/];
+                        }
                     });
-                };
+                }); };
                 linkRecipe = function (r) { return __awaiter(void 0, void 0, void 0, function () {
-                    var _a, _b, _c;
+                    var newIngredients, _a, newColaterals, _b, newProducedIns, _c;
                     return __generator(this, function (_d) {
                         switch (_d.label) {
                             case 0:
                                 if (!r.ingredients) return [3 /*break*/, 2];
-                                _a = newMaterial.recipe;
-                                return [4 /*yield*/, Promise.all(r.ingredients.map(function (i) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-                                        switch (_a.label) {
-                                            case 0: return [4 /*yield*/, buildRefList(i, true)];
-                                            case 1: return [2 /*return*/, _a.sent()];
-                                        }
-                                    }); }); }))];
+                                return [4 /*yield*/, Promise.all(r.ingredients.map(function (i) { return __awaiter(void 0, void 0, void 0, function () {
+                                        var newMaterial;
+                                        return __generator(this, function (_a) {
+                                            switch (_a.label) {
+                                                case 0: return [4 /*yield*/, insertId(i.material)];
+                                                case 1:
+                                                    newMaterial = _a.sent();
+                                                    return [2 /*return*/, __assign(__assign({}, i), { material: newMaterial })];
+                                            }
+                                        });
+                                    }); }))];
                             case 1:
-                                _a.ingredients = _d.sent();
-                                console.log("new ingredients:");
-                                newMaterial.recipe.ingredient.forEach(function (i) { return console.log(i); });
-                                _d.label = 2;
+                                _a = _d.sent();
+                                return [3 /*break*/, 3];
                             case 2:
-                                if (!m.recipe.colaterals) return [3 /*break*/, 4];
-                                _b = newMaterial.recipe;
-                                return [4 /*yield*/, Promise.all(r.colaterals.map(function (i) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-                                        switch (_a.label) {
-                                            case 0: return [4 /*yield*/, buildRefList(i, true)];
-                                            case 1: return [2 /*return*/, _a.sent()];
-                                        }
-                                    }); }); }))];
+                                _a = undefined;
+                                _d.label = 3;
                             case 3:
-                                _b.colaterals = _d.sent();
-                                console.log("new colaterals:");
-                                newMaterial.recipe.colaterals.forEach(function (i) { return console.log(i); });
-                                _d.label = 4;
+                                newIngredients = _a;
+                                if (!r.colaterals) return [3 /*break*/, 5];
+                                return [4 /*yield*/, Promise.all(r.colaterals.map(function (c) { return __awaiter(void 0, void 0, void 0, function () {
+                                        var newColateral;
+                                        return __generator(this, function (_a) {
+                                            switch (_a.label) {
+                                                case 0: return [4 /*yield*/, insertId(c.material)];
+                                                case 1:
+                                                    newColateral = _a.sent();
+                                                    return [2 /*return*/, __assign(__assign({}, c), { material: newColateral })];
+                                            }
+                                        });
+                                    }); }))];
                             case 4:
-                                if (!r.producedIn) return [3 /*break*/, 6];
-                                _c = newMaterial.recipe;
+                                _b = _d.sent();
+                                return [3 /*break*/, 6];
+                            case 5:
+                                _b = undefined;
+                                _d.label = 6;
+                            case 6:
+                                newColaterals = _b;
+                                if (!r.producedIn) return [3 /*break*/, 8];
                                 return [4 /*yield*/, Promise.all(r.producedIn.map(function (p) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
                                         switch (_a.label) {
-                                            case 0: return [4 /*yield*/, buildRefList(p)];
+                                            case 0: return [4 /*yield*/, insertId(p)];
                                             case 1: return [2 /*return*/, _a.sent()];
                                         }
                                     }); }); }))];
-                            case 5:
-                                _c.producedIn = _d.sent();
-                                console.log("new produced ins");
-                                newMaterial.producedIn.forEach(function (i) { return console.log(i); });
-                                _d.label = 6;
-                            case 6: return [2 /*return*/];
+                            case 7:
+                                _c = _d.sent();
+                                return [3 /*break*/, 9];
+                            case 8:
+                                _c = undefined;
+                                _d.label = 9;
+                            case 9:
+                                newProducedIns = _c;
+                                return [2 /*return*/, __assign(__assign({}, r), { ingredients: newIngredients, colaterals: newColaterals, producedIn: newProducedIns })];
                         }
                     });
                 }); };
+                newRecipe = m.recipe;
                 if (!m.recipe) return [3 /*break*/, 2];
                 return [4 /*yield*/, linkRecipe(m.recipe)];
             case 1:
-                _a.sent();
-                _a.label = 2;
+                linkedRecipe = _c.sent();
+                newRecipe = linkedRecipe;
+                _c.label = 2;
             case 2:
-                if (m.altRecipes) {
-                    m.altRecipes.forEach(function (r) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+                newAltRecipes = m.altRecipes;
+                if (!m.altRecipes) return [3 /*break*/, 4];
+                return [4 /*yield*/, Promise.all((_a = m.altRecipes) === null || _a === void 0 ? void 0 : _a.map(function (r) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0: return [4 /*yield*/, linkRecipe(r)];
                             case 1: return [2 /*return*/, _a.sent()];
                         }
-                    }); }); });
-                }
-                if (m.gatheredWith) {
-                    newMaterial.gatheredWith = m.gatheredWith.map(function (g) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+                    }); }); }))];
+            case 3:
+                linkedAltRecipes = _c.sent();
+                newAltRecipes = linkedAltRecipes;
+                _c.label = 4;
+            case 4:
+                newGatheredWith = m.gatheredWith;
+                if (!m.gatheredWith) return [3 /*break*/, 6];
+                return [4 /*yield*/, Promise.all((_b = m.gatheredWith) === null || _b === void 0 ? void 0 : _b.map(function (g) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
                         switch (_a.label) {
-                            case 0: return [4 /*yield*/, buildRefList(g)];
+                            case 0: return [4 /*yield*/, insertId(g)];
                             case 1: return [2 /*return*/, _a.sent()];
                         }
-                    }); }); });
-                    console.log("new gathered withs");
-                    newMaterial.gatheredWith.forEach(function (i) { return console.log(i); });
-                }
-                console.log("rebuilt ".concat(m.name));
+                    }); }); }))];
+            case 5:
+                linkedGatheredWith = _c.sent();
+                newGatheredWith = linkedGatheredWith;
+                _c.label = 6;
+            case 6:
+                newMaterial = __assign(__assign({}, m), { recipe: newRecipe, altRecipes: newAltRecipes, gatheredWith: newGatheredWith });
+                if (!(JSON.stringify(m) === JSON.stringify(newMaterial))) return [3 /*break*/, 7];
+                console.log("no changes to ".concat(m.name));
                 return [2 /*return*/];
+            case 7:
+                console.log("changes detected for material ".concat(m.name));
+                return [4 /*yield*/, getCol()];
+            case 8:
+                col = _c.sent();
+                return [4 /*yield*/, col.replaceOne({ _id: newMaterial._id }, newMaterial)];
+            case 9:
+                _c.sent();
+                _c.label = 10;
+            case 10: return [2 /*return*/];
         }
     });
 }); };
@@ -1531,30 +1817,64 @@ var createPlaceholder = function () { return __awaiter(void 0, void 0, void 0, f
         case 1: return [2 /*return*/, _a.sent()];
     }
 }); }); };
-// createPlaceholder();
-// raws.forEach(async (m, index) => {
-//     await addMaterial(m);
-// })
-// rawCraftables.forEach(async (m, index) => {
-//   await addMaterial(m);
-// })
-// tier1Craftables.forEach(async (m, index) => {
-//   await addMaterial(m);
-// });
-// teir2Craftables.forEach(async (m, index) => {
-//     await addMaterial(m);
-// });
-// t2Structures.forEach(async (m, index) => {
-//     await addMaterial(m);
-// })
-// t3Craftables.forEach(async (m, index) => {
-//   await addMaterial(m);
-// })
-// t3Structures.forEach(async (m, index) => {
-//   await addMaterial(m);
-// })
+var createMaterials = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var createdMaterialsPromises, createdMaterials, _i, createdMaterialsPromises_1, p, material;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                createdMaterialsPromises = __spreadArray(__spreadArray(__spreadArray(__spreadArray(__spreadArray(__spreadArray(__spreadArray(__spreadArray(__spreadArray(__spreadArray([], raws.map(function (m) { return addMaterial(m); }), true), rawCraftables.map(function (m) { return addMaterial(m); }), true), t1Craftables.map(function (m) { return addMaterial(m); }), true), t2Craftables.map(function (m) { return addMaterial(m); }), true), t2Structures.map(function (m) { return addMaterial(m); }), true), t3Craftables.map(function (m) { return addMaterial(m); }), true), t3Structures.map(function (m) { return addMaterial(m); }), true), t4Craftables.map(function (m) { return addMaterial(m); }), true), t5Craftables.map(function (m) { return addMaterial(m); }), true), t6Craftables.map(function (m) { return addMaterial(m); }), true);
+                createdMaterials = [];
+                _i = 0, createdMaterialsPromises_1 = createdMaterialsPromises;
+                _a.label = 1;
+            case 1:
+                if (!(_i < createdMaterialsPromises_1.length)) return [3 /*break*/, 4];
+                p = createdMaterialsPromises_1[_i];
+                return [4 /*yield*/, p];
+            case 2:
+                material = _a.sent();
+                createdMaterials.push(material);
+                _a.label = 3;
+            case 3:
+                _i++;
+                return [3 /*break*/, 1];
+            case 4:
+                console.log("created ".concat(createdMaterials.length, " materials"));
+                // console.log(createdMaterials);
+                return [2 /*return*/, createdMaterials];
+        }
+    });
+}); };
+var linkCreatedMaterials = function (createdMaterials) { return __awaiter(void 0, void 0, void 0, function () {
+    var linkedMaterials, _i, createdMaterials_1, m, index, linkedM;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                linkedMaterials = [];
+                _i = 0, createdMaterials_1 = createdMaterials;
+                _a.label = 1;
+            case 1:
+                if (!(_i < createdMaterials_1.length)) return [3 /*break*/, 5];
+                m = createdMaterials_1[_i];
+                if (!!m) return [3 /*break*/, 2];
+                index = createdMaterials.indexOf(m);
+                console.log("there's an undefined material at index ".concat(index, " of createdMaterials"));
+                return [3 /*break*/, 4];
+            case 2:
+                console.log("linking ".concat(m.name, "..."));
+                return [4 /*yield*/, linkRefs(m)];
+            case 3:
+                linkedM = _a.sent();
+                linkedMaterials.push(linkedM);
+                _a.label = 4;
+            case 4:
+                _i++;
+                return [3 /*break*/, 1];
+            case 5: return [2 /*return*/, linkedMaterials];
+        }
+    });
+}); };
 var deleteAll = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var col, filter, res, e_7;
+    var col, filter, res, e_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, getCol()];
@@ -1570,33 +1890,51 @@ var deleteAll = function () { return __awaiter(void 0, void 0, void 0, function 
                 console.log("deleted ".concat(res.deletedCount, " records"));
                 return [3 /*break*/, 5];
             case 4:
-                e_7 = _a.sent();
-                console.log(e_7);
+                e_5 = _a.sent();
+                console.log(e_5);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }
     });
 }); };
-// deleteAll();
-var rebuild = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var col, m1;
+var getAll = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var col;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, getCol()];
             case 1:
                 col = _a.sent();
-                return [4 /*yield*/, col.findOne({
-                        name: "Circuit Board"
-                    })];
-            case 2:
-                m1 = _a.sent();
-                console.log("linking refs for ".concat(m1.name));
-                return [4 /*yield*/, linkRefs(m1)];
-            case 3:
+                return [4 /*yield*/, col
+                        .find({
+                        name: { $ne: "placeholder" },
+                        // name: { $eq: "Proliferator Mk.I" },
+                    })
+                        .toArray()];
+            case 2: return [2 /*return*/, _a.sent()];
+        }
+    });
+}); };
+var execute = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var createdMaterials;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, deleteAll()];
+            case 1:
                 _a.sent();
+                return [4 /*yield*/, createMaterials()];
+            case 2:
+                _a.sent();
+                return [4 /*yield*/, getAll()];
+            case 3:
+                createdMaterials = _a.sent();
+                return [4 /*yield*/, linkCreatedMaterials(createdMaterials)];
+            case 4:
+                _a.sent();
+                console.log("End of file");
                 return [2 /*return*/];
         }
     });
 }); };
-rebuild();
+execute();
 // pnpm --package=typescript dlx tsc --skipLibCheck ./records.ts && node records.js
+// mongod -dbpath ~/mongo-data
