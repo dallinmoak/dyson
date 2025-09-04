@@ -478,7 +478,7 @@ let t1Craftables: CraftableMaterial[] = [
       ],
       outputCount: 1,
       craftingTime: 4,
-      producedIn: sLists.oilCollectors,
+      producedIn: sLists.oilRefiners,
       replicator: false,
     },
     icon: "https://static.wikia.nocookie.net/dyson-sphere-program/images/5/56/Refined_Oil.png",
@@ -1249,6 +1249,91 @@ let t3Structures: StructureCraftable[] = [
     },
     icon: "https://media.dsp-wiki.com/8/8e/Icon_Assembling_Machine_Mk.I.png",
   },
+  {
+    name: "Tesla Tower",
+    materialType: "structure",
+    tier: 3,
+    categories: ["general", "energy"],
+    recipe: {
+      ingredients: [
+        {
+          material: { targetName: "Iron Ingot" },
+          quantity: 2,
+        },
+        {
+          material: { targetName: "Magnetic Coil" },
+          quantity: 1,
+        },
+      ],
+      outputCount: 1,
+      craftingTime: 1,
+      producedIn: sLists.assemblers,
+      replicator: true,
+    },
+    icon: "https://media.dsp-wiki.com/f/f1/Icon_Tesla_Tower.png",
+  },
+  {
+    name: "Arc Smelter",
+    materialType: "structure-crafter",
+    tier: 3,
+    categories: ["general"],
+    recipe: {
+      ingredients: [
+        {
+          material: { targetName: "Iron Ingot" },
+          quantity: 4,
+        },
+        {
+          material: { targetName: "Stone Brick" },
+          quantity: 2,
+        },
+        {
+          material: { targetName: "Circuit Board" },
+          quantity: 4,
+        },
+        {
+          material: { targetName: "Magnetic Coil" },
+          quantity: 4,
+        },
+      ],
+      outputCount: 1,
+      craftingTime: 3,
+      producedIn: sLists.assemblers,
+      replicator: true,
+    },
+    icon: "https://media.dsp-wiki.com/6/60/Icon_Arc_Smelter.png",
+  },
+  {
+    name: "Mining Machine",
+    materialType: "structure-crafter",
+    tier: 3,
+    categories: ["general"],
+    recipe: {
+      ingredients: [
+        {
+          material: { targetName: "Iron Ingot" },
+          quantity: 4,
+        },
+        {
+          material: { targetName: "Circuit Board" },
+          quantity: 2,
+        },
+        {
+          material: { targetName: "Magnetic Coil" },
+          quantity: 2,
+        },
+        {
+          material: { targetName: "Gear" },
+          quantity: 2,
+        },
+      ],
+      outputCount: 1,
+      craftingTime: 3,
+      producedIn: sLists.assemblers,
+      replicator: true,
+    },
+    icon: "https://media.dsp-wiki.com/c/cf/Icon_Mining_Machine.png",
+  },
 ];
 
 let t4Craftables: CraftableMaterial[] = [
@@ -1311,6 +1396,40 @@ let t4Craftables: CraftableMaterial[] = [
       replicator: true,
     },
     icon: "https://media.dsp-wiki.com/5/53/Icon_Electromagnetic_Turbine.png",
+  },
+];
+
+let t4Structures: StructureCraftable[] = [
+  {
+    name: "Oil Refinery",
+    materialType: "structure-crafter",
+    tier: 4,
+    categories: ["general"],
+    recipe: {
+      ingredients: [
+        {
+          material: { targetName: "Steel" },
+          quantity: 10,
+        },
+        {
+          material: { targetName: "Stone Brick" },
+          quantity: 10,
+        },
+        {
+          material: { targetName: "Circuit Board" },
+          quantity: 6,
+        },
+        {
+          material: { targetName: "Plasma Exciter" },
+          quantity: 9,
+        },
+      ],
+      outputCount: 1,
+      craftingTime: 6,
+      producedIn: sLists.assemblers,
+      replicator: true,
+    },
+    icon: "https://media.dsp-wiki.com/7/74/Icon_Oil_Refinery.png",
   },
 ];
 
@@ -1669,6 +1788,7 @@ const createMaterials = async () => {
     ...t3Craftables.map((m) => addMaterial(m)),
     ...t3Structures.map((m) => addMaterial(m)),
     ...t4Craftables.map((m) => addMaterial(m)),
+    ...t4Structures.map((m) => addMaterial(m)),
     ...t5Craftables.map((m) => addMaterial(m)),
     ...t6Craftables.map((m) => addMaterial(m)),
   ];
